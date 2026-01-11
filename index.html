@@ -12,9 +12,9 @@
         :root {
             --primary: #00d2ff;
             --secondary: #3a7bd5;
-            /* الخلفية الافتراضية هي صورة الفريق */
+            /* هنا الكود سيستدعي الصورة التي سميتها أنت CSU TEAM.jpg (وهي الآن الأنابيب الزرقاء) */
             --bg-image: url('CSU TEAM.jpg');
-            --glass-bg: rgba(30, 40, 50, 0.85);
+            --glass-bg: rgba(30, 40, 50, 0.9);
             --glass-border: rgba(255, 255, 255, 0.15);
             --text: #ffffff;
             --success: #00c851;
@@ -35,7 +35,7 @@
             position: relative;
             z-index: 1;
             overflow-x: hidden;
-            padding-bottom: 80px;
+            padding-bottom: 80px; 
             user-select: none;
         }
 
@@ -44,7 +44,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: var(--bg-image);
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: cover; 
             background-position: center center;
             background-attachment: fixed;
             box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
@@ -75,7 +75,7 @@
             margin-bottom: 10px;
         }
 
-        /* --- أزرار التحكم العلوية --- */
+        /* --- Buttons & Inputs --- */
         .top-btn {
             position: absolute; top: 15px; width: 35px; height: 35px;
             border-radius: 10px; display: flex; align-items: center; justify-content: center;
@@ -84,30 +84,19 @@
         }
         .top-btn:hover { transform: translateY(-2px); }
 
-        .btn-theme { left: 15px; }
-        .btn-theme:hover { background: var(--primary); color: #000; }
-
-        .btn-logout { left: 60px; border-color: rgba(255,68,68,0.3); color: #ff6666; }
-        .btn-logout:hover { background: var(--danger); color: #fff; }
-
-        .btn-info { right: 15px; font-family: serif; font-weight: bold; }
-        .btn-info:hover { background: var(--primary); color: #000; }
-
-        .btn-notes { right: 60px; border-color: rgba(255,187,51,0.3); color: #ffcc00; }
-        .btn-notes:hover { background: var(--warning); color: #000; }
+        .btn-theme { left: 15px; } .btn-theme:hover { background: var(--primary); color: #000; }
+        .btn-logout { left: 60px; border-color: rgba(255,68,68,0.3); color: #ff6666; } .btn-logout:hover { background: var(--danger); color: #fff; }
+        .btn-info { right: 15px; font-family: serif; font-weight: bold; } .btn-info:hover { background: var(--primary); color: #000; }
+        .btn-notes { right: 60px; border-color: rgba(255,187,51,0.3); color: #ffcc00; } .btn-notes:hover { background: var(--warning); color: #000; }
 
         .back-arrow-container {
-            position: absolute;
-            top: 15px; left: 50%; transform: translateX(-50%);
-            cursor: pointer; z-index: 20;
-            background: rgba(255,255,255,0.15);
-            padding: 5px 20px; border-radius: 10px;
-            border: 1px solid var(--glass-border);
+            position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+            cursor: pointer; z-index: 20; background: rgba(255,255,255,0.15);
+            padding: 5px 20px; border-radius: 10px; border: 1px solid var(--glass-border);
             font-size: 1.2em; color: #fff; transition: 0.3s;
         }
         .back-arrow-container:hover { background: rgba(255,255,255,0.3); transform: translateX(-50%) scale(1.05); }
 
-        /* --- الحقول --- */
         .input-group { margin-bottom: 12px; text-align: right; }
         label { display: block; margin-bottom: 5px; font-size: 0.85em; color: #ccc; }
         input, select, textarea {
@@ -121,16 +110,6 @@
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); background: rgba(0,0,0,0.6); }
         .row { display: flex; gap: 10px; }
 
-        .salary-toggle-btn {
-            background: rgba(0, 210, 255, 0.1); border: 1px solid var(--primary);
-            color: var(--primary); width: 100%; padding: 10px; border-radius: 8px;
-            cursor: pointer; font-size: 0.9em; margin-bottom: 10px; transition:0.3s;
-        }
-        .salary-toggle-btn:hover { background: rgba(0, 210, 255, 0.2); }
-
-        .salary-inputs { display: none; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glass-border); }
-        .section-title { font-size: 0.9em; color: #aaa; margin-bottom: 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
-
         .btn {
             width: 100%; padding: 12px;
             background: linear-gradient(45deg, var(--secondary), var(--primary));
@@ -139,58 +118,37 @@
             margin-top: 5px; font-weight: bold;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
-
-        /* حاوية الأزرار (تنزيل) */
-        .download-buttons-container {
-            display: flex; gap: 10px; margin-top: 15px;
+        
+        /* زر جدول السنة الجديد */
+        .btn-year-plan {
+            width: 100%; padding: 10px; margin-top: 10px;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--primary);
+            color: var(--primary); border-radius: 10px; cursor: pointer;
+            font-weight: bold; font-size: 0.95em; transition: 0.3s;
         }
+        .btn-year-plan:hover { background: var(--primary); color: #000; }
 
+        .download-buttons-container { display: flex; gap: 10px; margin-top: 15px; }
         .download-btn {
-            flex: 1;
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column;
             border: 1px solid rgba(255,255,255,0.2); color: #fff;
             text-decoration: none; padding: 10px; border-radius: 10px;
-            font-weight: bold; transition: 0.3s; font-size: 0.8em;
-            cursor: pointer;
+            font-weight: bold; transition: 0.3s; font-size: 0.8em; cursor: pointer;
         }
-        .download-btn span { font-size: 1.5em; margin-bottom: 5px; display: block; }
+        .btn-android { background: rgba(0, 0, 0, 0.6); border-color: #3DDC84; } .btn-android:hover { background: #3DDC84; color: #000; }
+        .btn-ios { background: rgba(0, 0, 0, 0.6); border-color: #fff; } .btn-ios:hover { background: #fff; color: #000; }
 
-        /* زر الأندرويد */
-        .btn-android { background: rgba(0, 0, 0, 0.6); border-color: #3DDC84; }
-        .btn-android:hover { background: #3DDC84; color: #000; }
-
-        /* زر الآيفون */
-        .btn-ios { background: rgba(0, 0, 0, 0.6); border-color: #fff; }
-        .btn-ios:hover { background: #fff; color: #000; }
-
-
-        .progress-container {
-            width: 100%; height: 8px; background: rgba(255,255,255,0.1);
-            border-radius: 10px; margin: 15px 0 5px 0; overflow: hidden; position: relative;
-        }
-        .progress-bar {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            transition: width 1s ease-in-out; border-radius: 10px;
-        }
+        .progress-container { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 15px 0 5px 0; overflow: hidden; position: relative; }
+        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--secondary), var(--primary)); transition: width 1s ease-in-out; border-radius: 10px; }
         .progress-text { font-size: 0.75em; color: #aaa; margin-bottom: 15px; }
 
-        /* --- البار السفلي الجديد --- */
         .bottom-nav {
-            display: none;
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            height: 60px; background: var(--nav-bg);
-            border-top: 1px solid var(--glass-border);
-            justify-content: center; align-items: center;
-            gap: 60px; z-index: 1000;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-            padding: 0;
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
+            background: var(--nav-bg); border-top: 1px solid var(--glass-border);
+            justify-content: center; align-items: center; gap: 60px; z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5); padding: 0;
         }
-        .nav-item {
-            color: #777; text-align: center; cursor: pointer;
-            transition: 0.3s;
-            display: flex; flex-direction: column; align-items: center;
-        }
+        .nav-item { color: #777; text-align: center; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .nav-item.active { color: var(--primary); transform: scale(1.1); }
         .nav-icon { font-size: 1.4em; display: block; margin-bottom: 2px; }
         .nav-text { font-size: 0.75em; }
@@ -199,27 +157,14 @@
         .view-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .status-badge {
-            display: inline-block; padding: 8px 30px; border-radius: 25px;
-            font-weight: bold; font-size: 1.2em; margin: 5px 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .status-badge { display: inline-block; padding: 8px 30px; border-radius: 25px; font-weight: bold; font-size: 1.2em; margin: 5px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .status-work { background-color: var(--danger); color: white; }
         .status-off { background-color: var(--success); color: white; }
 
-        .timer {
-            font-size: 2.8em; font-weight: bold; margin: 5px 0;
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary); text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
-            direction: ltr;
-        }
+        .timer { font-size: 2.8em; font-weight: bold; margin: 5px 0; font-family: 'Courier New', Courier, monospace; color: var(--primary); text-shadow: 0 0 15px rgba(0, 210, 255, 0.4); direction: ltr; }
 
         .roadmap-container { display: flex; gap: 10px; margin: 20px 0; }
-        .roadmap-box {
-            flex: 1; background: rgba(0,0,0,0.3);
-            border: 1px solid var(--glass-border); border-radius: 12px;
-            padding: 10px; text-align: center;
-        }
+        .roadmap-box { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; padding: 10px; text-align: center; }
         .roadmap-label { font-size: 0.75em; color: #aaa; margin-bottom: 5px; }
         .roadmap-date { font-size: 1em; font-weight: bold; color: #fff; direction: ltr; }
         .roadmap-icon { font-size: 1.4em; display: block; margin-bottom: 5px; }
@@ -231,71 +176,52 @@
         .cal-rest { background: rgba(0, 200, 81, 0.6); color: #fff; }
         .cal-today { border: 2px solid #fff; transform: scale(1.1); z-index: 2; box-shadow: 0 0 5px #fff; }
 
-        .salary-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 1px solid var(--glass-border);
-            border-radius: 15px; padding: 15px; margin-bottom: 10px;
-            text-align: right; position: relative; overflow: hidden; transition: 0.3s;
-        }
+        .salary-card { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid var(--glass-border); border-radius: 15px; padding: 15px; margin-bottom: 10px; text-align: right; position: relative; overflow: hidden; transition: 0.3s; }
         .salary-label { font-size: 0.85em; color: #ccc; display: block; }
         .salary-value { font-size: 1.5em; font-weight: bold; color: #fff; display: block; margin-top: 5px; direction: ltr; transition: 0.3s; }
         .blur-text { filter: blur(8px); opacity: 0.5; user-select: none; }
+        .privacy-toggle { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.2em; cursor: pointer; color: #aaa; z-index: 20; }
+        .salary-inputs { display: none; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glass-border); }
+        .salary-toggle-btn { background: rgba(0, 210, 255, 0.1); border: 1px solid var(--primary); color: var(--primary); width: 100%; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 0.9em; margin-bottom: 10px; transition:0.3s; }
+        .salary-toggle-btn:hover { background: rgba(0, 210, 255, 0.2); }
+        .section-title { font-size: 0.9em; color: #aaa; margin-bottom: 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
 
-        .privacy-toggle {
-            position: absolute; top: 15px; right: 15px;
-            background: none; border: none; font-size: 1.2em;
-            cursor: pointer; color: #aaa; z-index: 20;
-        }
-
-        .share-btn {
-            background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);
-            color: #fff; width: 100%; padding: 10px; border-radius: 8px; margin-top: 15px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: 0.3s; font-size: 0.9em;
-        }
+        .share-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: #fff; width: 100%; padding: 10px; border-radius: 8px; margin-top: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; font-size: 0.9em; }
         .share-btn:hover { background: rgba(255,255,255,0.2); }
 
+        /* Modals */
         .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
-        .modal-content { background: #1a2f38; margin: 20% auto; padding: 25px; border-radius: 15px; width: 85%; max-width: 350px; text-align: center; border: 1px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .close-modal { float: left; font-size: 28px; cursor: pointer; color: #aaa; }
+        .modal-content { background: #1a2f38; margin: 15% auto; padding: 25px; border-radius: 15px; width: 90%; max-width: 450px; text-align: center; border: 1px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; }
+        .close-modal { position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #aaa; }
 
-        .alert-content {
-            margin: 0; position: fixed; bottom: 30px; left: 50%;
-            transform: translateX(-50%); width: 90%; max-width: 400px;
-            border-color: var(--warning); box-shadow: 0 5px 25px rgba(255, 187, 51, 0.4);
-            background: rgba(40, 30, 20, 0.98); animation: slideUp 0.4s ease-out forwards;
-            z-index: 3101; text-align: left; direction: ltr;
-        }
-        @keyframes slideUp {
-            from { bottom: -150px; opacity: 0; }
-            to { bottom: 30px; opacity: 1; }
-        }
+        .alert-content { margin: 0; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; border-color: var(--warning); box-shadow: 0 5px 25px rgba(255, 187, 51, 0.4); background: rgba(40, 30, 20, 0.98); animation: slideUp 0.4s ease-out forwards; z-index: 3101; text-align: left; direction: ltr; }
+        @keyframes slideUp { from { bottom: -150px; opacity: 0; } to { bottom: 30px; opacity: 1; } }
         .alert-title { color: var(--warning); margin-top: 0; font-size: 1.4em; }
         #customAlertText { font-size: 1.1em; line-height: 1.5; color: #eee; margin: 15px 0; }
 
         .btn-edit { background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: #ddd; width: 100%; padding: 10px; border-radius: 8px; margin-top: 20px; cursor: pointer; }
-
-        .footer {
-            margin-top: 20px; font-size: 0.75em; color: #888;
-            text-align: center; font-family: sans-serif;
-            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; width: 100%;
-        }
+        .footer { margin-top: 20px; font-size: 0.75em; color: #888; text-align: center; font-family: sans-serif; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; width: 100%; }
 
         #notesList { max-height: 200px; overflow-y: auto; margin-top: 15px; text-align: right; }
-        .note-item {
-            background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; margin-bottom: 8px;
-            border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: flex-start;
-        }
+        .note-item { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: flex-start; }
         .note-text { color: #fff; font-size: 0.9em; width: 85%; word-break: break-word; }
         .note-date { display: block; font-size: 0.7em; color: var(--secondary); margin-top: 5px; direction: ltr; }
         .delete-note { color: #ff4444; cursor: pointer; font-size: 1.2em; padding: 0 5px; }
-
-        #notesModal .modal-content { max-width: 400px; }
         #newNoteInput { width: 100%; height: 60px; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid #555; color: #fff; text-align: right; resize: none; }
-
-        /* تنسيق قائمة تعليمات الآيفون */
+        
         .ios-steps { text-align: right; margin-top: 15px; color: #ddd; font-size: 0.9em; line-height: 1.6; }
-        .ios-step-icon { font-size: 1.2em; margin-left: 8px; vertical-align: middle; }
+
+        /* تنسيق جدول السنة الجديد */
+        #yearScheduleList { max-height: 350px; overflow-y: auto; margin-top: 15px; text-align: left; direction: ltr; padding-right: 5px; }
+        .year-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px; margin-bottom: 8px; border-radius: 8px;
+            background: rgba(255,255,255,0.05); border-left: 4px solid var(--secondary);
+        }
+        .year-item.work { border-left-color: var(--danger); background: rgba(255, 68, 68, 0.1); }
+        .year-item.rest { border-left-color: var(--success); background: rgba(0, 200, 81, 0.1); }
+        .y-date { font-weight: bold; color: #fff; }
+        .y-label { font-size: 0.8em; color: #ccc; }
     </style>
 </head>
 <body>
@@ -413,6 +339,10 @@
                 </div>
             </div>
 
+            <div onclick="generateYearSchedule()" class="btn-year-plan">
+                📅 Full Year Schedule / جدول السنة الكامل
+            </div>
+
             <button class="share-btn" onclick="shareStatus()">
                 <span>📤 Share Status / مشاركة الحالة</span>
             </button>
@@ -501,10 +431,7 @@
                 <li><b>🔒 خصوصية تامة:</b> يعمل بدون إنترنت، وبياناتك محفوظة بجهازك فقط.</li>
             </ul>
         </div>
-
-        <div style="text-align: center; margin-top: 15px; font-size: 0.8em; color: var(--primary);">
-            Version 1.2
-        </div>
+        <div style="text-align: center; margin-top: 15px; font-size: 0.8em; color: var(--primary);">Version 1.2</div>
     </div>
 </div>
 
@@ -532,6 +459,17 @@
     </div>
 </div>
 
+<div id="yearModal" class="modal">
+    <div class="modal-content" style="max-height: 80vh; overflow: hidden; display: flex; flex-direction: column;">
+        <span class="close-modal" onclick="closeModal('yearModal')">&times;</span>
+        <h3 style="color:var(--primary)">📅 Yearly Plan / جدول السنة</h3>
+        <div style="font-size:0.8em; color:#aaa; margin-bottom:10px;">Upcoming Rotation Cycles (Next 12 Months)</div>
+        <div id="yearScheduleList">
+            </div>
+        <button class="btn" onclick="closeModal('yearModal')" style="margin-top:10px;">Close / إغلاق</button>
+    </div>
+</div>
+
 <div id="customAlertModal" class="modal" style="z-index: 3100;">
     <div class="modal-content alert-content">
         <div style="font-size: 3em; margin-bottom: 10px; text-align: center;">🔮</div>
@@ -545,18 +483,17 @@
     let timerInterval;
     let isPrivacyOn = false;
     let userNotesList = [];
-    let currentShareText = "";
+    let currentShareText = ""; 
 
-    const themes = [ "url('CSU TEAM.jpg')", "linear-gradient(to right, #2c5364, #203a43, #0f2027)", "url('CPF.jpg')", "url('Malnoon oil field.jpg')" ];
+    // ✅ مصفوفة الثيمات: لاحظ أن أول صورة (رقم 0) هي CSU TEAM.jpg
+    // وهذا الاسم الآن يشير إلى الصورة الزرقاء الجديدة التي وضعتها أنت
+    const themes = [ "url('CSU TEAM.jpg')", "linear-gradient(to right, #2c5364, #203a43, #0f2027)", "url('CPF.jpg')" ];
     let currentTheme = 0;
 
     window.onload = function() {
         const savedTheme = localStorage.getItem('kbr_themeIndex');
-        if(savedTheme) {
-            toggleTheme(parseInt(savedTheme));
-        } else {
-            toggleTheme(0);
-        }
+        // إذا كان هناك ثيم محفوظ، نستخدمه. إذا لا، نستخدم رقم 0 (CSU TEAM.jpg)
+        if(savedTheme) toggleTheme(parseInt(savedTheme)); else toggleTheme(0);
 
         if(localStorage.getItem('kbr_notes_array')) {
             try { userNotesList = JSON.parse(localStorage.getItem('kbr_notes_array')); renderNotes(); } catch(e) { userNotesList = []; }
@@ -780,7 +717,6 @@
                 followingChangeDate = new Date(nextChangeDate);
                 followingChangeDate.setDate(nextChangeDate.getDate() + restDays);
                 updateUI("On Duty (في الدوام)", "status-work", "Next Rest", nextChangeDate, "Back to Work", followingChangeDate);
-
                 statusText = "On Duty 🛑 (في الدوام)";
                 nextDateLabel = "Rest Starts:";
                 nextDateVal = nextChangeDate.toLocaleDateString('en-GB');
@@ -789,7 +725,6 @@
                 followingChangeDate = new Date(nextChangeDate);
                 followingChangeDate.setDate(nextChangeDate.getDate() + workDays);
                 updateUI("Off Duty (في الاستراحة)", "status-off", "Back to Work", nextChangeDate, "Next Rest", followingChangeDate);
-
                 statusText = "Off Duty 🏠 (استراحة)";
                 nextDateLabel = "Back to Work:";
                 nextDateVal = nextChangeDate.toLocaleDateString('en-GB');
@@ -802,7 +737,6 @@
                 const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
                 document.getElementById('timer').innerText = `${d}d ${h}:${m}:${s}`;
-
                 currentShareText = `👋 My Rotation Status:\n\n${statusText}\n⏳ Remaining: ${d} Days\n📅 ${nextDateLabel} ${nextDateVal}\n\nGenerated by KBR Tracker`;
             }
         }, 1000);
@@ -816,6 +750,62 @@
         document.getElementById('nextEventDate').innerText = date1.toLocaleDateString('en-GB');
         document.getElementById('followingEventLabel').innerText = label2;
         document.getElementById('followingEventDate').innerText = date2.toLocaleDateString('en-GB');
+    }
+
+    // --- دالة توليد جدول السنة الكاملة ---
+    function generateYearSchedule() {
+        const workDays = parseInt(document.getElementById('workDays').value);
+        const restDays = parseInt(document.getElementById('restDays').value);
+        const startStr = document.getElementById('startDate').value;
+        const startType = document.getElementById('startType').value;
+        const listContainer = document.getElementById('yearScheduleList');
+
+        if(isNaN(workDays) || isNaN(restDays) || !startStr) return;
+
+        listContainer.innerHTML = "";
+        
+        let currentDate = createDate(startStr);
+        if (startType === 'rest') currentDate.setDate(currentDate.getDate() - workDays);
+
+        const cycleLength = workDays + restDays;
+        const oneYearFromNow = new Date();
+        oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+
+        let tempDate = new Date(currentDate);
+        const today = new Date();
+        const daysDiff = Math.floor((today - tempDate) / (1000 * 60 * 60 * 24));
+        if(daysDiff > 0) {
+            const cyclesPassed = Math.floor(daysDiff / cycleLength);
+            tempDate.setDate(tempDate.getDate() + (cyclesPassed * cycleLength));
+        }
+
+        for(let i=0; i<15; i++) {
+            let workStart = new Date(tempDate);
+            let restStart = new Date(tempDate);
+            restStart.setDate(workStart.getDate() + workDays);
+            let nextCycle = new Date(restStart);
+            nextCycle.setDate(restStart.getDate() + restDays);
+
+            const workItem = document.createElement('div');
+            workItem.className = 'year-item work';
+            workItem.innerHTML = `
+                <div><div class="y-date">${workStart.toLocaleDateString('en-GB')}</div><div class="y-label">Start Work / التحاق</div></div>
+                <div style="font-size:1.5em">🛑</div>
+            `;
+            listContainer.appendChild(workItem);
+
+            const restItem = document.createElement('div');
+            restItem.className = 'year-item rest';
+            restItem.innerHTML = `
+                <div><div class="y-date">${restStart.toLocaleDateString('en-GB')}</div><div class="y-label">Start Rest / نزول</div></div>
+                <div style="font-size:1.5em">🏠</div>
+            `;
+            listContainer.appendChild(restItem);
+
+            tempDate = nextCycle;
+            if(tempDate > oneYearFromNow) break;
+        }
+        openModal('yearModal');
     }
 
     function generateCalendar(startStr, workDays, restDays, startType) {
