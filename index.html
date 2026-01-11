@@ -85,7 +85,6 @@
 
         .btn-theme { left: 15px; } .btn-theme:hover { background: var(--primary); color: #000; }
 
-        /* زر العملات الجديد بجانب زر الثيم */
         .btn-currency { left: 60px; color: #88ff88; border-color: rgba(136, 255, 136, 0.3); }
         .btn-currency:hover { background: #00c851; color: #fff; }
 
@@ -125,7 +124,6 @@
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
 
-        /* زر حساب الراتب فقط */
         .btn-salary-only {
             background: rgba(0, 200, 81, 0.2); border: 1px solid var(--success); color: #88ff88;
             margin-top: 10px; font-size: 0.9em;
@@ -243,6 +241,21 @@
         /* Currency Modal Styles */
         .currency-result { font-size: 1.8em; color: var(--success); font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(0, 200, 81, 0.3); }
         .currency-label { font-size: 0.9em; color: #aaa; margin-top: 10px; }
+
+        /* زر التبديل */
+        .currency-swap-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .currency-swap-btn:hover { background: var(--primary); color: #000; }
     </style>
 </head>
 <body>
@@ -260,7 +273,6 @@
 <div class="container" id="mainContainer">
 
     <div class="top-btn btn-theme" onclick="toggleTheme()" title="Background">🖼️</div>
-
     <div class="top-btn btn-currency" onclick="openModal('currencyModal')" title="Currency Converter">💱</div>
 
     <div class="top-btn btn-logout" onclick="confirmLogout()" title="Logout">🚪</div>
@@ -441,9 +453,13 @@
         <span class="close-modal" onclick="closeModal('currencyModal')">&times;</span>
         <h3 style="color:var(--success)">💱 Live Converter</h3>
 
+        <div onclick="toggleDirection()" class="currency-swap-btn" title="Switch Direction">
+            <span id="directionIcon">⬇️</span> <span id="directionText">USD to Local</span>
+        </div>
+
         <div class="input-group">
-            <label>Amount (USD) / المبلغ بالدولار</label>
-            <input type="number" id="convAmount" placeholder="100" oninput="convertCurrency()">
+            <label id="amountLabel">Amount (USD) / المبلغ بالدولار</label>
+            <input type="number" id="convAmount" step="any" placeholder="100" oninput="convertCurrency()">
         </div>
 
         <div class="input-group">
@@ -460,7 +476,7 @@
         </div>
 
         <div class="input-group">
-            <label>Exchange Rate (Today) / سعر الصرف اليوم</label>
+            <label>Exchange Rate / سعر الصرف</label>
             <input type="number" id="convRate" placeholder="e.g. 1500" oninput="convertCurrency()">
         </div>
 
@@ -493,7 +509,7 @@
                 <li><b>🔒 خصوصية تامة:</b> يعمل بدون إنترنت، وبياناتك محفوظة بجهازك فقط.</li>
             </ul>
         </div>
-        <div style="text-align: center; margin-top: 15px; font-size: 0.8em; color: var(--primary);">Version 1.3</div>
+        <div style="text-align: center; margin-top: 15px; font-size: 0.8em; color: var(--primary);">Version 1.4</div>
     </div>
 </div>
 
@@ -572,7 +588,6 @@
             document.getElementById('socialRate').value = localStorage.getItem('kbr_socialRate');
             document.getElementById('monthsWorked').value = localStorage.getItem('kbr_monthsWorked');
 
-            // Load saved converter rates
             const savedRates = JSON.parse(localStorage.getItem('kbr_savedRates') || '{}');
             window.savedRates = savedRates;
 
@@ -589,12 +604,36 @@
         window.baseGreeting = greeting;
     };
 
-    // --- Currency Converter Logic ---
+    // --- Currency Converter Logic (Updated) ---
+    let isUsdToLocal = true;
+
+    function toggleDirection() {
+        isUsdToLocal = !isUsdToLocal;
+        const icon = document.getElementById('directionIcon');
+        const text = document.getElementById('directionText');
+        const label = document.getElementById('amountLabel');
+        const country = document.getElementById('convCountry').value;
+
+        if (isUsdToLocal) {
+            icon.innerText = "⬇️";
+            text.innerText = "USD to Local";
+            label.innerText = "Amount (USD) / المبلغ بالدولار";
+        } else {
+            icon.innerText = "⬆️";
+            text.innerText = "Local to USD";
+            label.innerText = `Amount (${country}) / المبلغ بالعملة المحلية`;
+        }
+        convertCurrency();
+    }
+
     function updateRatePlaceholder() {
         const country = document.getElementById('convCountry').value;
         const rateInput = document.getElementById('convRate');
 
-        // استرجاع السعر المحفوظ لهذه الدولة
+        if (!isUsdToLocal) {
+             document.getElementById('amountLabel').innerText = `Amount (${country}) / المبلغ بالعملة المحلية`;
+        }
+
         if(window.savedRates && window.savedRates[country]) {
             rateInput.value = window.savedRates[country];
         } else {
@@ -620,35 +659,35 @@
             return;
         }
 
-        // حفظ السعر الجديد
         window.savedRates[country] = rate;
         localStorage.setItem('kbr_savedRates', JSON.stringify(window.savedRates));
 
-        const result = amount * rate;
-
+        let result = 0;
         let symbol = "";
-        if(country === 'IQD') symbol = "د.ع";
-        else if(country === 'TRY') symbol = "₺";
-        else if(country === 'INR') symbol = "₹";
-        else if(country === 'CNY') symbol = "¥";
-        else if(country === 'AED') symbol = "AED";
-        else if(country === 'SAR') symbol = "SAR";
-        else symbol = "";
 
-        resDiv.innerText = result.toLocaleString() + " " + symbol;
+        if (isUsdToLocal) {
+            result = amount * rate;
+            if(country === 'IQD') symbol = "د.ع";
+            else if(country === 'TRY') symbol = "₺";
+            else if(country === 'INR') symbol = "₹";
+            else symbol = country;
+        } else {
+            result = amount / rate;
+            symbol = "$";
+        }
+
+        const digits = (symbol === "$") ? 2 : 0;
+        resDiv.innerText = result.toLocaleString(undefined, {maximumFractionDigits: digits}) + " " + symbol;
     }
 
     // --- Salary Only Logic ---
     function calculateSalaryOnly() {
-        // نتحقق فقط من حقول الراتب
         const annualGross = parseFloat(document.getElementById('annualSalary').value);
         if (isNaN(annualGross) || annualGross <= 0) {
             showCustomAlert("Please enter Annual Salary first.\nيرجى إدخال الراتب السنوي أولاً.");
             return;
         }
-
-        // استدعاء الحساب لكن بدون التحقق من التواريخ
-        calculateAll(true, true); // true, true = isAuto, isSalaryOnly
+        calculateAll(true, true);
     }
 
     function createDate(dateString) {
@@ -774,7 +813,6 @@
         const socialRate = parseFloat(document.getElementById('socialRate').value) || 0;
         const monthsWorked = parseFloat(document.getElementById('monthsWorked').value) || 0;
 
-        // التحقق من الحقول (إذا لم يكن تلقائي ولا راتب فقط)
         if (!isAuto && !isSalaryOnly) {
             let missing = [];
             if (isNaN(workDays) || isNaN(restDays)) missing.push("• Work & Rest Days");
@@ -786,7 +824,6 @@
             }
         }
 
-        // حفظ البيانات
         localStorage.setItem('kbr_username', name);
         if(!isSalaryOnly) {
             localStorage.setItem('kbr_workDays', workDays);
@@ -806,14 +843,12 @@
         document.getElementById('displayHeader').innerText = name ? `${greetingText}, ${name}` : greetingText;
         document.getElementById('bottomNav').style.display = 'flex';
 
-        // توجيه المستخدم للتبويب الصحيح
         if(isSalaryOnly) {
             switchTab('salary');
         } else if (!isAuto) {
             switchTab('rotation');
         }
 
-        // Salary Logic
         const totalDeductionPercent = taxRate + socialRate;
         const annualNet = annualGross * (1 - (totalDeductionPercent / 100));
         const totalDeductionAmount = annualGross - annualNet;
@@ -834,14 +869,12 @@
 
         renderSalary();
 
-        // تشغيل المؤقتات فقط إذا كانت البيانات موجودة
         if (startDateStr && !isNaN(workDays)) {
             startTimer(startDateStr, workDays, restDays, startType);
             generateCalendar(startDateStr, workDays, restDays, startType);
         } else {
-            // إيقاف أي مؤقت سابق وتصفير الواجهة إذا كان وضع الراتب فقط
             if(timerInterval) clearInterval(timerInterval);
-            document.getElementById('rotationView').classList.remove('active'); // إخفاء الروتيشن إذا لم تكن البيانات موجودة
+            document.getElementById('rotationView').classList.remove('active');
         }
     }
 
