@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KBR Rotation Tracker</title>
+    <title>Emloyees Rotation Tracker</title>
 
     <link rel="icon" href="kbr-removebg-preview.png" type="image/png">
     <link rel="apple-touch-icon" href="kbr-removebg-preview.png">
@@ -35,7 +35,7 @@
             position: relative;
             z-index: 1;
             overflow-x: hidden;
-            padding-bottom: 80px; 
+            padding-bottom: 80px;
             user-select: none;
         }
 
@@ -44,7 +44,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: var(--bg-image);
             background-repeat: no-repeat;
-            background-size: cover; 
+            background-size: cover;
             background-position: center center;
             background-attachment: fixed;
             box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
@@ -118,7 +118,7 @@
             margin-top: 5px; font-weight: bold;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
-        
+
         /* زر جدول السنة الجديد */
         .btn-year-plan {
             width: 100%; padding: 10px; margin-top: 10px;
@@ -208,7 +208,7 @@
         .note-date { display: block; font-size: 0.7em; color: var(--secondary); margin-top: 5px; direction: ltr; }
         .delete-note { color: #ff4444; cursor: pointer; font-size: 1.2em; padding: 0 5px; }
         #newNoteInput { width: 100%; height: 60px; padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid #555; color: #fff; text-align: right; resize: none; }
-        
+
         .ios-steps { text-align: right; margin-top: 15px; color: #ddd; font-size: 0.9em; line-height: 1.6; }
 
         /* تنسيق جدول السنة الجديد */
@@ -403,28 +403,21 @@
 </div>
 
 <div id="infoModal" class="modal">
-   <div class="modal-content" style="max-width: 450px; width: 90%; text-align: left; max-height: 80vh; overflow-y: auto; margin: 15% auto;">
+    <div class="modal-content" style="max-width: 450px; width: 90%; text-align: left; max-height: 80vh; overflow-y: auto; margin: 15% auto;">
         <span class="close-modal" onclick="closeModal('infoModal')">&times;</span>
-
         <h3 style="color:var(--primary); text-align: center; margin-top: 0;">About App / عن التطبيق</h3>
-
         <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
-            <h4 style="color:#fff; margin-bottom: 5px;"> Employees Rotation Tracker</h4>
-            <p style="font-size: 0.85em; color: #ccc; line-height: 1.5;">
-                The ultimate companion for rotation-based employees.
-            </p>
+            <h4 style="color:#fff; margin-bottom: 5px;">Employees Rotation Tracker</h4>
+            <p style="font-size: 0.85em; color: #ccc; line-height: 1.5;">The ultimate companion for rotation-based employees.</p>
             <ul style="font-size: 0.85em; color: #ccc; padding-left: 20px; line-height: 1.4;">
                 <li><b>📅 Smart Tracking:</b> Calculates work/rest cycles & counts down to your vacation.</li>
                 <li><b>💰 Salary Calc:</b> Estimates Net Monthly Salary after tax & social security.</li>
                 <li><b>🔒 Offline & Private:</b> 100% offline. Data stays on your device.</li>
             </ul>
         </div>
-
         <div style="text-align: right; direction: rtl;">
             <h4 style="color:#fff; margin-bottom: 5px;">🇮🇶 نظام تتبع المناوبات</h4>
-            <p style="font-size: 0.85em; color: #ccc; line-height: 1.5;">
-                الرفيق الأمثل لموظفي الروتيشن لإدارة الوقت والمال.
-            </p>
+            <p style="font-size: 0.85em; color: #ccc; line-height: 1.5;">الرفيق الأمثل لموظفي الروتيشن لإدارة الوقت والمال.</p>
             <ul style="font-size: 0.85em; color: #ccc; padding-right: 20px; line-height: 1.4;">
                 <li><b>📅 تتبع ذكي:</b> حساب دقيق لأيام العمل والإجازة مع عداد تنازلي.</li>
                 <li><b>💰 حاسبة الراتب:</b> تقدير الصافي الشهري بعد استقطاع الضريبة والضمان.</li>
@@ -483,7 +476,7 @@
     let timerInterval;
     let isPrivacyOn = false;
     let userNotesList = [];
-    let currentShareText = ""; 
+    let currentShareText = "";
 
     // ✅ مصفوفة الثيمات: لاحظ أن أول صورة (رقم 0) هي CSU TEAM.jpg
     // وهذا الاسم الآن يشير إلى الصورة الزرقاء الجديدة التي وضعتها أنت
@@ -763,7 +756,7 @@
         if(isNaN(workDays) || isNaN(restDays) || !startStr) return;
 
         listContainer.innerHTML = "";
-        
+
         let currentDate = createDate(startStr);
         if (startType === 'rest') currentDate.setDate(currentDate.getDate() - workDays);
 
